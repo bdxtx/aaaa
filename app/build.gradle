@@ -1,0 +1,243 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        applicationId "com.weiyu.sp.lsjy"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1000
+        versionName "1.0"
+        //配置dimension
+        flavorDimensions "pack"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    //3.0版本Gradle开始必须添加纬度
+    flavorDimensions "default"
+
+    //多渠道打包配置
+    productFlavors {
+        //渠道包
+        app_platform {
+            manifestPlaceholders = [app_name: "来自平台", channel: "platform"]
+        }
+        app_360 {
+            manifestPlaceholders = [app_name: "360渠道包", channel: "360"]
+        }
+        app_qq {
+            manifestPlaceholders = [app_name: "应用宝渠道包", channel: "qq"]
+        }
+        app_xiaomi{
+            manifestPlaceholders = [app_name: "小米", channel: "xiaomi"]
+        }
+        app_huawei{
+            manifestPlaceholders = [app_name: "华为", channel: "huawei"]
+        }
+        app_vivo{
+            manifestPlaceholders = [app_name: "vivo", channel: "vivox"]
+        }
+        app_oppo{
+            manifestPlaceholders = [app_name: "oppo", channel: "oppo"]
+        }
+    }
+    signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        release {
+            storeFile
+            storePassword
+            keyAlias
+            keyPassword
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    getSigningProperties()
+
+    //自定义输出包名的设置
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 输出apk名称为sharev1.0_tencent.apk
+            def fileName = "lsjy${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+            outputFileName = fileName
+        }
+    }
+
+    //其他设置
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true  //启用debug的buildType配置
+        }
+        //输出类型
+        applicationVariants.all {
+            //判断是release还是debug版本
+            def buildType = it.buildType.name
+            //获取当前时间的"YYYY-MM-dd"格式。
+            def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+            //如果是正式包,将其输入到指定文件夹
+            if (buildType == "release") {
+                it.getPackageApplication().outputDirectory = new File('C:\\out_apk'+ "/${it.productFlavors[0].applicationId}/${createTime}")
+            }
+        }
+    }
+
+    compileOptions {
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+
+        targetCompatibility JavaVersion.VERSION_1_8
+
+    }
+
+    allprojects {
+        repositories {
+
+            // 添加下面的内容
+            flatDir {
+                dirs 'libs'
+            }
+
+            // ... jcenter() 等其他仓库
+        }
+    }
+
+}
+//读取签名配置文件
+def getSigningProperties() {
+
+    def propFile = file('signing.properties')
+    if (propFile.canRead()) {
+        def Properties props = new Properties()
+        props.load(new FileInputStream(propFile))
+        if (props != null && props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+
+            android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+            android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+            android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+            android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+
+        } else {
+
+            println 'signing.properties found but some entries are missing'
+            android.buildTypes.release.signingConfig = null
+        }
+    } else {
+        println 'signing.properties not found'
+        android.buildTypes.release.signingConfig = null
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.android.support:design:29.+'
+
+
+    //butterknife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //rxjava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    //AutoDispose解决RxJava内存泄漏
+    implementation 'com.uber.autodispose:autodispose:0.7.0'
+    implementation 'com.uber.autodispose:autodispose-android:0.7.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:0.7.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //BaseAdapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //fastJson
+    implementation 'com.alibaba:fastjson:1.2.28'
+
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+
+    testImplementation 'org.mockito:mockito-core:2.25.1'
+    implementation 'com.android.support:recyclerview-v7:29.+'
+
+    //轮播图
+    implementation 'cn.bingoogolapple:bga-banner:2.2.5@aar'
+    implementation 'com.android.support:cardview-v7:29+'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+
+    implementation 'me.jessyan:autosize:1.2.1'//屏幕适配
+
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation(name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')//支付宝
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'//微信
+
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
+
+    implementation 'com.android.support:multidex:1.0.3'//方法太多了需要分包
+
+    //retrofit 的fastJson解析器
+    implementation 'com.github.BaronZ88:Retrofit2-FastJson-Converter:1.2'
+
+    implementation 'com.github.addappcn:android-pickers:2.0.0'//滚轮选择器
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'//图表
+
+    implementation 'com.ycjiang:VideoPlayModule:2.3.50'
+    implementation 'com.wang.avi:library:2.1.3'
+
+    //dk 播放器  https://github.com/Doikki/DKVideoPlayer
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
+    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
+
+    //H5和Android通信框架，之后再修改
+//    implementation 'com.github.open-android:BridgeWebView:v1.0'
+//    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+
+    implementation 'com.just.agentweb:agentweb:4.1.2'//web
+
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.0'
+
+    compile 'cn.yipianfengye.android:zxing-library:2.2'
+
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+}

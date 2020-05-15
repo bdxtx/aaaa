@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splash.G1Fragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/g_bg"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sp_4"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="137dp"/>
+    <TextView
+        android:id="@+id/jump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳过"
+        android:textColor="#999999"
+        android:textSize="16.3sp"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="320dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="教育使命"
+        android:textColor="#333333"
+        android:textSize="27.17sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="507dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="涵盖考点考纲及教材  力求严谨专业深刻"
+        android:textColor="#999999"
+        android:textSize="13.59sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="556dp"/>
+    <TextView
+        android:id="@+id/enter"
+        android:layout_width="151dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="立即体验"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/yellow_btn"
+        android:layout_marginBottom="77dp">
+    </TextView>
+
+</FrameLayout>

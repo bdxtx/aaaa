@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_no_network"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="44dp"
+        android:visibility="gone"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_network"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="128dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="网络连接失败"
+            android:textSize="15dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#555555"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请检查您的网络设置或重新加载"
+            android:textSize="13dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#555555"
+            android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tv_refresh"
+            android:layout_width="136dp"
+            android:layout_height="44dp"
+            android:text="重新加载"
+            android:textColor="@color/white"
+            android:background="@drawable/yellow_btn"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp"/>
+
+    </LinearLayout>
+

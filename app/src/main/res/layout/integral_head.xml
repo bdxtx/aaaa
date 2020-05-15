@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/header_default"/>
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150****5503"
+            android:textColor="#333333"
+            android:textSize="20dp"
+            android:layout_marginLeft="76dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/tv_integral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="积分余额：3326"
+            android:textColor="#999999"
+            android:textSize="13dp"
+            android:layout_marginLeft="76dp"
+            android:layout_marginTop="47dp"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/img_ad"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/integral_bg" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="14dp"
+        android:background="#F7F7F7"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_line"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兑好礼"
+            android:textSize="18dp"
+            android:textColor="#333333"
+            android:layout_marginLeft="21dp"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
+
+</LinearLayout>
