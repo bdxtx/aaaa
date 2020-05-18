@@ -31,6 +31,7 @@ import com.weiyu.sp.lsjy.utils.ChannelUtil;
 import com.weiyu.sp.lsjy.utils.SPUtils;
 import com.weiyu.sp.lsjy.utils.SystemUtil;
 import com.weiyu.sp.lsjy.utils.ToastUtil;
+import com.weiyu.sp.lsjy.view.dialog.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -97,7 +98,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                     return;
                 }
                 mPresenter.sendMsg(phone);
-                startCount();
                 break;
             case R.id.tv_login:
                 if (etCode.getText().toString().length()!=6){
@@ -152,6 +152,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void onSuccess(String code) {
         etCode.setText(code);
+        startCount();
     }
 
     @Override
@@ -166,9 +167,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         finish();
     }
 
-    @Override
-    public void showLoading() {
-        super.showLoading();
+
+    public void showLoading(){
+        loadingDialog = LoadingDialog.newInstance();
+        loadingDialog.show(getSupportFragmentManager(),"load");
     }
 
     @Override

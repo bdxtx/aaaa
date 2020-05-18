@@ -13,7 +13,7 @@ import com.weiyu.sp.lsjy.view.dialog.LoadingDialog;
 
 public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActivity implements BaseView {
     protected T mPresenter;
-    private LoadingDialog loadingDialog;
+    protected LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

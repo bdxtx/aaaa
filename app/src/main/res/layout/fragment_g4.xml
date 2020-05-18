@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/sp_4"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="137dp"/>
+        android:layout_marginTop="283dp"/>
     <TextView
         android:id="@+id/jump"
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:textColor="#333333"
         android:textSize="27.17sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="507dp"/>
+        android:layout_marginTop="120dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:textColor="#999999"
         android:textSize="13.59sp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="556dp"/>
+        android:layout_marginTop="169dp"/>
     <TextView
         android:id="@+id/enter"
         android:layout_width="151dp"

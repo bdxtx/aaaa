@@ -57,11 +57,11 @@ public class RetrofitClient {
     private APIService apiService;
 
 //    https://www.jianshu.com/p/66b59ad1fdc1
-//    private String baseUrl="http://192.168.0.124:7001/";
+    private String baseUrl="http://192.168.0.111:7001/";
 //    private String baseUrl="http://47.111.142.189:7001/";
 //    private String baseUrl="http://192.168.0.114:7001/";
 //    private String baseUrl="https://api8.luosijiaoyu.com/";
-    private String baseUrl="https://api.luosijiaoyu.com/";//正式环境
+//    private String baseUrl="https://api.luosijiaoyu.com/";//正式环境
 //    private String baseUrl="http:/192.168.101.31:7001/";
 //    private String baseUrl="http:/192.168.0.102:7001/";
     private RSAPublicKey rsaPublicKey;
@@ -365,9 +365,9 @@ public class RetrofitClient {
                 //设置拦截器
                 .addInterceptor(getInterceptor())
                 .addInterceptor(new StateInterceptor())
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .readTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(3, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -392,9 +392,9 @@ public class RetrofitClient {
                 //设置拦截器
                 .addInterceptor(getInterceptor())
 //                .addInterceptor(new StateInterceptor())
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .readTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(3, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()

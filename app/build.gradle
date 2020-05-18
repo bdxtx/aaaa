@@ -89,7 +89,7 @@ android {
             def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
             //如果是正式包,将其输入到指定文件夹
             if (buildType == "release") {
-                it.getPackageApplication().outputDirectory = new File('C:\\out_apk'+ "/${it.productFlavors[0].applicationId}/${createTime}")
+                it.getPackageApplication().outputDirectory = new File('out_apk'+ "/${defaultConfig.applicationId}/${createTime}")
             }
         }
     }
